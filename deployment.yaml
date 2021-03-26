@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: userapi
+  name: userapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userapi
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: userapi
+    spec:
+      containers:
+      - image: userapi
+        name: userapi
+        resources: {}
+        imagePullPolicy: Never
+status: {}
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: userapi
+  name: userapi
+spec:
+  ports:
+  - port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: userapi
+  type: LoadBalancer
+status:
+  loadBalancer: {}
